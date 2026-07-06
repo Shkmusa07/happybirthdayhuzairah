@@ -1,7 +1,7 @@
 'use strict';
 
 /* ═══ CONFIG ═══ */
-const CODE = '1808', MAX_TAPS = 4;
+const CODE = '0707', MAX_TAPS = 4;
 
 /* ═══ DOM ═══ */
 const p1=id('phase-1'),p2=id('phase-2'),p3=id('phase-3');
