@@ -272,15 +272,15 @@ function fireConfetti(box, count){
 /* PHOTO WALL — SCATTERED */
 const MEMORIES=[
   {img:'0b3aa247-483b-4ab1-adc0-c00daa58f86b.JPG', cap:'golden hour✨'},
-  {img:'1e0b408f-722b-4f44-8d49-c70fbfdb58e5.JPG', cap:'chasing the northern lights 🌌'},
+  {img:'1e0b408f-722b-4f44-8d49-c70fbfdb58e5.JPG', cap:'every new morning ☁️'},
   {img:'2d72396a-7b4e-4f90-9f46-91b7cb7e2661.JPG', cap:'in full bloom, like you 🌸'},
   {img:'IMG_1685.PNG', cap:'lost in the deep 🌊'},
-  {img:'IMG_4949.jpg', cap:'golden days ☀️'},
+  {img:'IMG_4949.jpg', cap:'prettiest girl i ever seen💗'},
   {img:'ae2c134e-5e44-4a89-a817-1c9ef97b8855.JPG', cap:'secret garden 🌿'},
   {img:'aec93b29-840c-4c2e-80c1-66f9b3816f00.JPG', cap:'for you, forever 🌹'},
   {img:'dd7de683-2717-4233-8829-9ec32cbccac1.JPG', cap:'late night talks 🌙'},
   {img:'e5bbce84-09dc-4751-88ad-78dfb8e342ab.JPG', cap:'fields of lavender 💜'},
-  {img:'f9749392-10b4-4e93-9857-9f5d154dda1e.JPG', cap:'every new morning ☁️'}
+  {img:'f9749392-10b4-4e93-9857-9f5d154dda1e.JPG', cap:'chasing the northern lights 🌌'}
 ];
 
 // Carefully placed positions [left%, top px, width px] — 3-col natural scatter
