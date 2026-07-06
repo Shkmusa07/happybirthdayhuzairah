@@ -244,6 +244,116 @@ body::before {
   --r1: 5deg
 }
 
+/* Twinkle Sparkles */
+.bg-sparkle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 20px;
+  animation: sparkleTwinkle 4s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes sparkleTwinkle {
+  0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0.15; }
+  50% { transform: scale(1.2) rotate(180deg); opacity: 0.55; text-shadow: 0 0 8px rgba(255,220,100,0.6); }
+}
+
+/* Butterfly Floating */
+.bg-butterfly {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.45;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  z-index: 0;
+  will-change: transform;
+}
+
+.bfly-wing-left {
+  position: absolute;
+  width: 16px;
+  height: 24px;
+  background: radial-gradient(circle, #ffcbd5, #ff85ae);
+  border-radius: 50% 50% 20% 50% / 50% 50% 20% 50%;
+  transform-origin: right bottom;
+  animation: wingLeftFlap 0.15s linear infinite;
+  right: 50%;
+  bottom: 50%;
+}
+
+.bfly-wing-right {
+  position: absolute;
+  width: 16px;
+  height: 24px;
+  background: radial-gradient(circle, #ffcbd5, #ff85ae);
+  border-radius: 50% 50% 50% 20% / 50% 50% 50% 20%;
+  transform-origin: left bottom;
+  animation: wingRightFlap 0.15s linear infinite;
+  left: 50%;
+  bottom: 50%;
+}
+
+.bfly-body {
+  position: absolute;
+  width: 3px;
+  height: 18px;
+  background: #5D4037;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes wingLeftFlap {
+  0%, 100% { transform: rotateY(0deg); }
+  50% { transform: rotateY(70deg); }
+}
+
+@keyframes wingRightFlap {
+  0%, 100% { transform: rotateY(0deg); }
+  50% { transform: rotateY(-70deg); }
+}
+
+/* Butterfly Flights */
+.bf1 {
+  left: 5vw;
+  top: 80vh;
+  animation: bflyFlight1 22s ease-in-out infinite 0s;
+}
+
+.bf2 {
+  left: 85vw;
+  top: 70vh;
+  animation: bflyFlight2 25s ease-in-out infinite -5s;
+}
+
+.bf3 {
+  left: 20vw;
+  top: 90vh;
+  animation: bflyFlight3 28s ease-in-out infinite -10s;
+}
+
+@keyframes bflyFlight1 {
+  0% { transform: translate3d(0, 0, 0) rotate(5deg) scale(0.7); }
+  33% { transform: translate3d(30vw, -30vh, 50px) rotate(-10deg) scale(0.9); }
+  66% { transform: translate3d(60vw, -60vh, -30px) rotate(15deg) scale(0.8); }
+  100% { transform: translate3d(95vw, -95vh, 10px) rotate(-5deg) scale(0.7); }
+}
+
+@keyframes bflyFlight2 {
+  0% { transform: translate3d(0, 0, 0) rotate(-15deg) scale(0.6); }
+  33% { transform: translate3d(-25vw, -25vh, -40px) rotate(5deg) scale(0.75); }
+  66% { transform: translate3d(-55vw, -45vh, 60px) rotate(-10deg) scale(0.7); }
+  100% { transform: translate3d(-90vw, -80vh, 10px) rotate(5deg) scale(0.6); }
+}
+
+@keyframes bflyFlight3 {
+  0% { transform: translate3d(0, 0, 0) rotate(20deg) scale(0.8); }
+  50% { transform: translate3d(45vw, -45vh, 100px) rotate(-20deg) scale(1); }
+  100% { transform: translate3d(70vw, -100vh, -100px) rotate(10deg) scale(0.8); }
+}
+
 /* ═══ PHASES ═══ */
 .phase {
   position: fixed;
@@ -1148,249 +1258,407 @@ body::before {
   100% { transform: rotateY(360deg); }
 }
 
-/* 3D CSS CAKE */
+/* ═══════════════════════════════
+   CSS 3D CAKE — COMPLETE REWRITE
+   Tier-1: 140×140 base, height=70, half-depth=70
+   Tier-2: 100×100 mid,  height=55, half-depth=50
+   Candle: 12×12×36 box, sits on tier-2 top
+   Toppers: 19 & unicorn lie on tier-2 top face
+═══════════════════════════════ */
+
 .css-cake-3d {
   position: relative;
+  /* box big enough to contain both tiers (140w × 125h) */
   width: 140px;
-  height: 140px;
+  height: 125px;
   margin: 0 auto;
   transform-style: preserve-3d;
-  transform: rotateX(-15deg);
+  /* tilt cake so top is visible */
+  transform: rotateX(-20deg);
   opacity: 0;
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition: opacity 1.2s ease;
 }
 
 .css-cake-3d.show {
   opacity: 1;
-  transform: rotateX(-15deg) translateY(0);
 }
 
+/* ── Tiers ── */
 .tier {
   position: absolute;
-  left: 50%;
   transform-style: preserve-3d;
+  /* centre horizontally */
+  left: 50%;
 }
 
+/* Tier-1: 140w × 140d × 70h, sits at bottom */
 .tier-1 {
   width: 140px;
-  height: 60px;
+  height: 70px;
   bottom: 0;
   margin-left: -70px;
 }
 
+/* Tier-2: 100w × 100d × 55h, sits on top of tier-1 */
 .tier-2 {
   width: 100px;
-  height: 50px;
-  bottom: 60px;
+  height: 55px;
+  bottom: 70px;   /* = tier-1 height */
   margin-left: -50px;
+  /* MUST preserve-3d so candle/toppers live in this 3D context */
+  transform-style: preserve-3d;
 }
 
+/* ── Faces shared style ── */
 .face {
   position: absolute;
-  background: linear-gradient(145deg, #f7f9fa, #e2e8f0); /* Light Grey/White */
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  /* warm white cake base */
+  background: linear-gradient(160deg, #fff8f2, #f0e6da);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: inset 0 0 14px rgba(100,50,50,0.06);
+  overflow: visible;
 }
 
-/* Tier 1 Faces */
-.tier-1 .front, .tier-1 .back { width: 140px; height: 60px; }
-.tier-1 .left, .tier-1 .right { width: 140px; height: 60px; }
-.tier-1 .top { width: 140px; height: 140px; }
-
-.tier-1 .front { transform: translateZ(70px); }
-.tier-1 .back  { transform: translateZ(-70px) rotateY(180deg); }
-.tier-1 .right { transform: rotateY(90deg) translateZ(70px); }
-.tier-1 .left  { transform: rotateY(-90deg) translateZ(70px); }
-.tier-1 .top   { 
-  transform: rotateX(90deg) translateZ(70px); 
-  background: #e2e8f0; 
+/* ── Tier-1 face geometry ──
+   Front/back: 140w × 70h
+   Left/right: 140d × 70h  (CSS depth = width of tier = 140)
+   Top: 140×140
+*/
+.tier-1 .front { width:140px; height:70px; transform: translateZ(70px); }
+.tier-1 .back  { width:140px; height:70px; transform: translateZ(-70px) rotateY(180deg); }
+.tier-1 .right { width:140px; height:70px; transform: rotateY(90deg)  translateZ(70px); }
+.tier-1 .left  { width:140px; height:70px; transform: rotateY(-90deg) translateZ(70px); }
+.tier-1 .top   { width:140px; height:140px;
+  transform: rotateX(90deg) translateZ(70px);
+  background: linear-gradient(135deg, #f0e6da, #e8d8cc);
 }
 
-/* Tier 2 Faces */
-.tier-2 .front, .tier-2 .back { width: 100px; height: 50px; }
-.tier-2 .left, .tier-2 .right { width: 100px; height: 50px; }
-.tier-2 .top { width: 100px; height: 100px; }
-
-.tier-2 .front { transform: translateZ(50px); }
-.tier-2 .back  { transform: translateZ(-50px) rotateY(180deg); }
-.tier-2 .right { transform: rotateY(90deg) translateZ(50px); }
-.tier-2 .left  { transform: rotateY(-90deg) translateZ(50px); }
-.tier-2 .top   { 
-  transform: rotateX(90deg) translateZ(50px); 
-  background: #f7f9fa;
+/* ── Tier-2 face geometry ──
+   Front/back: 100w × 55h
+   Left/right: 100d × 55h
+   Top: 100×100
+*/
+.tier-2 .front { width:100px; height:55px; transform: translateZ(50px); }
+.tier-2 .back  { width:100px; height:55px; transform: translateZ(-50px) rotateY(180deg); }
+.tier-2 .right { width:100px; height:55px; transform: rotateY(90deg)  translateZ(50px); }
+.tier-2 .left  { width:100px; height:55px; transform: rotateY(-90deg) translateZ(50px); }
+.tier-2 .top   { width:100px; height:100px;
+  transform: rotateX(90deg) translateZ(55px);
+  background: linear-gradient(135deg, #f7f0ea, #eedecf);
 }
 
-/* Cake Decor: Pink Icing drips (Left side focus) */
-.tier-1 .front::before, .tier-2 .front::before,
-.tier-1 .left::before, .tier-2 .left::before {
+/* ══════════════════════════════
+   ICING DRIPS — all 4 sides, both tiers, equal
+══════════════════════════════ */
+.tier-1 .front::before, .tier-1 .back::before,
+.tier-1 .right::before, .tier-1 .left::before,
+.tier-2 .front::before, .tier-2 .back::before,
+.tier-2 .right::before, .tier-2 .left::before {
   content: '';
   position: absolute;
-  top: -1px;
-  left: 0;
-  width: 50%;
-  height: 25px;
-  background: #FF6B9E; /* Pink Drip */
-  border-radius: 0 0 12px 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,.15);
-  clip-path: polygon(0 0, 100% 0, 90% 100%, 75% 70%, 55% 100%, 35% 60%, 15% 90%, 0 50%);
+  top: -1px; left: 0;
+  width: 100%; height: 28px;
+  background: linear-gradient(180deg, #FF6B9E 0%, #ff85ae 100%);
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    100% 45%, 92% 85%, 84% 42%, 76% 90%,
+    68% 48%, 60% 88%, 52% 44%, 44% 92%,
+    36% 50%, 28% 86%, 20% 42%, 12% 88%,
+    4% 46%, 0% 75%
+  );
+  filter: drop-shadow(0 2px 3px rgba(255,80,150,.3));
 }
 
-.tier-1 .left::before, .tier-2 .left::before {
-  width: 100%;
-}
-
-/* Cake Decor: Decorative pearls/bottom border */
-.tier-1 .front::after, .tier-1 .back::after,
-.tier-1 .left::after, .tier-1 .right::after,
-.tier-2 .front::after, .tier-2 .back::after,
-.tier-2 .left::after, .tier-2 .right::after {
-  content: '';
+/* Pearl border at bottom of each side face */
+.cake-pearl-row {
   position: absolute;
-  bottom: 0px;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  background: radial-gradient(circle at 6px 3px, white 3px, transparent 4px);
-  background-size: 12px 6px;
+  bottom: 0; left: 0;
+  width: 100%; height: 7px;
+  background: radial-gradient(circle at 6px 3.5px, #fff 3px, transparent 4px);
+  background-size: 12px 7px;
   background-repeat: repeat-x;
-  filter: drop-shadow(0 -1px 2px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 -1px 2px rgba(0,0,0,.08));
+  pointer-events: none;
 }
 
-/* 3D Decorative Spheres */
-.sphere {
-  position: absolute;
-  border-radius: 50%;
-  box-shadow: -2px -2px 8px rgba(0,0,0,0.2) inset, 2px 2px 5px rgba(255,255,255,0.4) inset, 2px 5px 8px rgba(0,0,0,0.2);
-}
-.sph-1 { width: 16px; height: 16px; background: #FF6B9E; bottom: 0; left: -10px; transform: translateZ(80px); }
-.sph-2 { width: 22px; height: 22px; background: #3498db; bottom: -5px; right: 10px; transform: translateZ(75px); }
-.sph-3 { width: 18px; height: 18px; background: #f1c40f; bottom: 15px; left: -5px; transform: translateZ(75px); }
-.sph-4 { width: 14px; height: 14px; background: #FF6B9E; bottom: 10px; right: -5px; transform: translateZ(80px); }
-.sph-5 { width: 18px; height: 18px; background: #f1c40f; top: -10px; left: 10px; transform: translateZ(55px); }
-.sph-6 { width: 15px; height: 15px; background: #3498db; top: -5px; left: -5px; transform: translateZ(50px); }
-.sph-7 { width: 14px; height: 14px; background: #FF6B9E; top: -8px; right: 5px; transform: translateZ(55px); }
-
-/* Flowers */
+/* Flowers — centred on each face, identical across all 4 sides */
 .cake-flower {
   position: absolute;
-  font-size: 24px;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
-}
-.cf-1 { bottom: 10px; left: 50%; transform: translateX(-50%); }
-.cf-2 { bottom: 5px; right: 10px; font-size: 18px; }
-
-/* Unicorn */
-.cake-unicorn {
-  position: absolute;
-  top: -45px;
+  font-size: 22px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.18));
+  bottom: 14px;
   left: 50%;
-  transform: translateX(-50%) translateZ(20px);
-  font-size: 40px;
-  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
 }
 
-/* Number 19 */
-.cake-number {
+.cake-topper-19 {
   position: absolute;
-  top: -40px;
-  left: 10px;
-  transform: translateZ(30px) rotateY(-10deg);
+  top: 0;
+  left: 15px; /* sit horizontally */
+  transform: translate3d(-30px, -45px, 0); /* sits on top of the cake, left of center */
+  transform-style: preserve-3d;
   font-family: var(--hf);
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
-  color: #FFB7C5; /* Light Pink */
-  -webkit-text-stroke: 1px #fff;
-  text-shadow: 
-    1px 1px 0 #FF6B9E,
-    2px 2px 0 #FF6B9E,
-    3px 3px 0 #FF6B9E,
-    4px 4px 0 #FF6B9E,
-    5px 5px 8px rgba(0,0,0,0.3);
+  pointer-events: none;
+  user-select: none;
+  animation: topperBob19 3.5s ease-in-out infinite;
 }
 
+.cake-topper-19 span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #FFB7C5;
+  -webkit-text-stroke: 1.5px rgba(255,107,158,0.9);
+  white-space: nowrap;
+}
+
+/* Layering for 3D extrusion */
+.cake-topper-19 span:nth-child(1) { transform: translateZ(0px); z-index: 5; }
+.cake-topper-19 span:nth-child(2) { transform: translateZ(-1px); filter: brightness(0.9); }
+.cake-topper-19 span:nth-child(3) { transform: translateZ(-2px); filter: brightness(0.8); }
+.cake-topper-19 span:nth-child(4) { transform: translateZ(-3px); filter: brightness(0.7); }
+.cake-topper-19 span:nth-child(5) { transform: translateZ(-4px); filter: brightness(0.6); 
+  text-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+
+/* ══════════════════════════════
+   TOPPER UNICORN — right side of tier-2 top
+   ══════════════════════════════ */
+.cake-topper-unicorn {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  transform: translate3d(30px, -45px, 0); /* sits on top of the cake, right of center */
+  transform-style: preserve-3d;
+  font-size: 36px;
+  pointer-events: none;
+  user-select: none;
+  animation: topperBobUnicorn 3s ease-in-out infinite 0.5s;
+}
+
+.cake-topper-unicorn span {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cake-topper-unicorn span:nth-child(1) { transform: translateZ(0px); z-index: 5; }
+.cake-topper-unicorn span:nth-child(2) { transform: translateZ(-1.5px); filter: brightness(0.85); }
+.cake-topper-unicorn span:nth-child(3) { transform: translateZ(-3px); filter: brightness(0.7); }
+.cake-topper-unicorn span:nth-child(4) { transform: translateZ(-4.5px); filter: brightness(0.55); }
+.cake-topper-unicorn span:nth-child(5) { transform: translateZ(-6px); filter: brightness(0.4);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+
+@keyframes topperBob19 {
+  0%, 100% { transform: translate3d(-30px, -45px, 0); }
+  50%       { transform: translate3d(-30px, -55px, 0); }
+}
+
+@keyframes topperBobUnicorn {
+  0%, 100% { transform: translate3d(30px, -45px, 0); }
+  50%       { transform: translate3d(30px, -55px, 0); }
+}
+
+/* ══════════════════════════════
+   3D CANDLE
+   A CSS box: 12px wide × 12px deep × 36px tall
+   Centred horizontally and vertically on tier-2 top.
+   Sits perfectly on the top surface.
+   ══════════════════════════════ */
 .candle-assembly {
   position: absolute;
-  top: -90px;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%) translateZ(0);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-left: -6px;  /* half of candle width 12px */
+  /* Rise above the tier-2 top (Z=0, Y=-36px to stand on surface) */
+  transform: translate3d(0, -36px, 0);
+  transform-style: preserve-3d;
+  width: 12px;
+  height: 36px;
   opacity: 0;
-  transition: opacity .4s ease;
+  transition: opacity .5s ease;
+  pointer-events: none;
 }
 
 .candle-assembly.show {
-  opacity: 1
+  opacity: 1;
 }
 
-.candle-stick {
-  width: 10px;
-  height: 34px;
-  background: linear-gradient(to right, #F8C8D4, #E8A0B0, #F8C8D4);
-  border-radius: 3px;
-  box-shadow: inset 1px 0 4px rgba(255, 255, 255, .5)
+/* ── 3D Candle Box ──
+   The candle stick box: 12×12×36px
+   Sits at Z=0 (flush on tier-2 top surface)
+*/
+.candle-3d {
+  position: absolute;
+  top: 0; left: 0;
+  width: 12px;
+  height: 36px;
+  transform-style: preserve-3d;
 }
 
+/* Candle face shared */
+.cf {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.4);
+}
+
+/* Candle is 12w × 12d × 36h */
+.cface-front { width:12px; height:36px; top:0; left:0; transform: translateZ(6px);
+  background: linear-gradient(to right, #ffc8d8, #FFB7C5, #ffd8e8); }
+.cface-back  { width:12px; height:36px; top:0; left:0; transform: translateZ(-6px) rotateY(180deg);
+  background: linear-gradient(to right, #e898b2, #ffb0c8, #e898b2); }
+.cface-right { width:12px; height:36px; top:0; left:0; transform: rotateY(90deg) translateZ(6px);
+  background: linear-gradient(to right, #f0aac0, #FFC8D8, #f0aac0); }
+.cface-left  { width:12px; height:36px; top:0; left:0; transform: rotateY(-90deg) translateZ(6px);
+  background: linear-gradient(to right, #f0aac0, #FFC8D8, #f0aac0); }
+.cface-top   { width:12px; height:12px; top:0; left:0;
+  /* top face: rotateX(-90deg) and translateZ(6px) to position at the top of the box */
+  transform: rotateX(-90deg) translateZ(6px);
+  background: radial-gradient(circle, #fff 35%, #FFB7C5);
+  border-radius: 2px; }
+
+/* Candle stripe decoration */
+.cface-front::before, .cface-back::before,
+.cface-right::before, .cface-left::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 0; right: 0; height: 3px;
+  background: rgba(255,255,255,0.55);
+  border-radius: 2px;
+}
+.cface-front::after, .cface-back::after,
+.cface-right::after, .cface-left::after {
+  content: '';
+  position: absolute;
+  top: 18px; left: 0; right: 0; height: 3px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 2px;
+}
+
+/* Wick — sits on top of candle box (local Y = -7px to start above top face, Z = 0) */
 .wick {
+  position: absolute;
+  top: 0; left: 50%;
+  margin-left: -1px;
   width: 2px;
-  height: 6px;
-  background: #555;
+  height: 7px;
+  background: linear-gradient(to bottom, #888, #333);
   border-radius: 1px;
-  margin-bottom: 0
+  transform: translate3d(0, -7px, 0);
+  z-index: 2;
 }
 
+/* Flame wrapper — floats above wick (candle 36px + wick 7px = 43px, we offset for proper 3D placement) */
+.flame-wrap {
+  position: absolute;
+  top: 0; left: 50%;
+  margin-left: -9px;
+  width: 18px;
+  transform: translate3d(0, -35px, 0);
+  z-index: 3;
+}
+
+/* Flames */
 .flame-outer {
-  width: 16px;
-  height: 28px;
-  background: linear-gradient(to top, #FF9800, #FFEB3B, rgba(255, 255, 255, .8));
-  border-radius: 50% 50% 35% 35%;
+  width: 18px;
+  height: 30px;
+  background: linear-gradient(to top, #FF6B00, #FFCC00, rgba(255,255,255,.9));
+  border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
   animation: flFlicker 1.1s ease-in-out infinite;
-  filter: blur(1.5px);
-  margin-bottom: 0
+  filter: blur(1.2px);
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
 }
 
 .flame-inner {
   position: absolute;
-  width: 8px;
-  height: 14px;
-  background: linear-gradient(to top, #FF5722, #FFE082);
-  border-radius: 50% 50% 30% 30%;
-  margin-top: -22px;
+  width: 9px;
+  height: 16px;
+  background: linear-gradient(to top, #FF4500, #FFE566);
+  border-radius: 50% 50% 35% 35% / 60% 60% 35% 35%;
+  bottom: 4px;
   left: 50%;
   transform: translateX(-50%);
-  animation: flFlicker .75s ease-in-out infinite reverse
+  animation: flFlicker .72s ease-in-out infinite reverse;
+  z-index: 4;
+  filter: blur(0.5px);
 }
 
 @keyframes flFlicker {
-  0%, 100% { transform: scaleX(1) scaleY(1); }
-  33% { transform: scaleX(.82) scaleY(1.12); }
-  66% { transform: scaleX(1.12) scaleY(.9); }
+  0%, 100% { transform: scaleX(1)   scaleY(1); }
+  30%       { transform: scaleX(.8)  scaleY(1.15) skewX(3deg); }
+  60%       { transform: scaleX(1.1) scaleY(.88) skewX(-3deg); }
 }
 
+/* ══ Blown-out state ══ */
+.candle-assembly.blown .flame-wrap {
+  opacity: 0;
+  transform: translate3d(0, -35px, 0) scaleY(0);
+  transform-origin: bottom center;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+/* ══════════════════════════════
+   DECORATIVE SPHERES — equal at corners
+   ══════════════════════════════ */
+.sphere {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  /* 3D sphere shading */
+  box-shadow:
+    inset -3px -3px 7px rgba(0,0,0,.25),
+    inset 2px  2px  5px rgba(255,255,255,.5),
+    2px 5px 8px rgba(0,0,0,.22);
+}
+
+/* Tier-1 top corners (14px size, rose pink) */
+.sph-t1-fl { width:14px; height:14px; background:#FF6B9E; top:-7px; left:-7px;  transform: translateZ(70px); }
+.sph-t1-fr { width:14px; height:14px; background:#FF6B9E; top:-7px; right:-7px; transform: translateZ(70px); }
+.sph-t1-bl { width:14px; height:14px; background:#FF6B9E; top:-7px; left:-7px;  transform: translateZ(-70px); }
+.sph-t1-br { width:14px; height:14px; background:#FF6B9E; top:-7px; right:-7px; transform: translateZ(-70px); }
+
+/* Tier-2 top corners (12px size, gold) */
+.sph-t2-fl { width:12px; height:12px; background:#FFD700; top:-6px; left:-6px;  transform: translateZ(50px); }
+.sph-t2-fr { width:12px; height:12px; background:#FFD700; top:-6px; right:-6px; transform: translateZ(50px); }
+.sph-t2-bl { width:12px; height:12px; background:#FFD700; top:-6px; left:-6px;  transform: translateZ(-50px); }
+.sph-t2-br { width:12px; height:12px; background:#FFD700; top:-6px; right:-6px; transform: translateZ(-50px); }
+
+/* ══════════════════════════════
+   GLOW (inside .cake-pod)
+   cake-pod has the spinning cake inside.
+   Glow is positioned below the candle.
+══════════════════════════════ */
 .cake-glow {
   position: absolute;
-  top: -80px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle, rgba(255, 220, 80, .7), rgba(255, 190, 40, .15), transparent);
-  filter: blur(16px);
+  transform: translate(-50%, -60%);
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(255,220,80,.75), rgba(255,190,40,.15), transparent 70%);
+  filter: blur(18px);
   border-radius: 50%;
   opacity: 0;
   transition: opacity .5s ease;
-  animation: glowPulse 2s ease-in-out infinite
+  animation: glowPulse 2s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.cake-glow.show {
-  opacity: .85
-}
+.cake-glow.show  { opacity: .85; }
+.cake-glow.blown { opacity: 0 !important; animation: none; }
 
 @keyframes glowPulse {
-  0%, 100% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.25); }
+  0%, 100% { transform: translate(-50%, -60%) scale(1); }
+  50%       { transform: translate(-50%, -60%) scale(1.28); }
 }
+
 
 .confetti-box {
   position: absolute;
@@ -1416,6 +1684,121 @@ body::before {
     opacity: 0;
     transform: translateY(340px) rotate(720deg)
   }
+}
+
+/* ── BLOW CANDLE BUTTON ── */
+.blow-btn-wrap {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: fadeInUp 0.8s var(--ease) both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.blow-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--rose), var(--roseDp));
+  color: #fff;
+  font-family: var(--df);
+  font-size: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(169,107,107,.4), 0 2px 8px rgba(169,107,107,.2);
+  transition: transform .2s ease, box-shadow .2s ease;
+  overflow: hidden;
+}
+
+.blow-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255,255,255,.25), transparent);
+  pointer-events: none;
+}
+
+.blow-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(169,107,107,.5);
+}
+
+.blow-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.blow-icon {
+  font-size: 1.5rem;
+  display: inline-block;
+  animation: micPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes micPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.2); }
+}
+
+/* Listening state */
+.blow-btn.listening {
+  background: linear-gradient(135deg, #8c4040, var(--roseDp));
+  animation: listenRipple 1s ease-in-out infinite;
+}
+
+@keyframes listenRipple {
+  0%, 100% { box-shadow: 0 8px 28px rgba(169,107,107,.4), 0 0 0 0 rgba(201,145,139,.6); }
+  50%       { box-shadow: 0 8px 28px rgba(169,107,107,.4), 0 0 0 14px rgba(201,145,139,0); }
+}
+
+.blow-hint {
+  font-family: var(--df);
+  font-size: 1.05rem;
+  color: var(--rose);
+  opacity: .85;
+  letter-spacing: .5px;
+}
+
+/* Wind bar indicator */
+.blow-meter {
+  width: 160px;
+  height: 8px;
+  background: rgba(200,145,139,.18);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(200,145,139,.3);
+}
+
+.blow-meter-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--blush), var(--rose), #ff6b9e);
+  border-radius: 8px;
+  transition: width 0.1s ease;
+}
+
+/* Blown-out celebration text */
+.blown-msg {
+  font-family: var(--df);
+  font-size: 1.6rem;
+  color: var(--roseDp);
+  text-align: center;
+  animation: blownMsgPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  margin-top: 8px;
+}
+
+@keyframes blownMsgPop {
+  0%   { opacity: 0; transform: scale(0.5); }
+  70%  { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 /* LETTER */

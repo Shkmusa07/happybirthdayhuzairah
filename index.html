@@ -24,6 +24,30 @@
   <div class="deco deco-rrose" id="deco-rr"></div>
   <div class="deco deco-sun1"  id="deco-sf1"></div>
   <div class="deco deco-sun2"  id="deco-sf2"></div>
+
+  <!-- Twinkle Sparkles -->
+  <div class="bg-sparkle sp1" style="top: 15%; left: 8%;">✨</div>
+  <div class="bg-sparkle sp2" style="top: 45%; left: 88%;">✨</div>
+  <div class="bg-sparkle sp3" style="top: 75%; left: 18%;">✨</div>
+  <div class="bg-sparkle sp4" style="top: 25%; right: 28%;">✨</div>
+  <div class="bg-sparkle sp5" style="top: 85%; right: 12%;">✨</div>
+
+  <!-- 3D Butterflies -->
+  <div class="bg-butterfly bf1">
+    <div class="bfly-wing-left"></div>
+    <div class="bfly-wing-right"></div>
+    <div class="bfly-body"></div>
+  </div>
+  <div class="bg-butterfly bf2">
+    <div class="bfly-wing-left" style="background: radial-gradient(circle, #e1ccff, #b98eff);"></div>
+    <div class="bfly-wing-right" style="background: radial-gradient(circle, #e1ccff, #b98eff);"></div>
+    <div class="bfly-body"></div>
+  </div>
+  <div class="bg-butterfly bf3">
+    <div class="bfly-wing-left" style="background: radial-gradient(circle, #ffe6cc, #ffa366);"></div>
+    <div class="bfly-wing-right" style="background: radial-gradient(circle, #ffe6cc, #ffa366);"></div>
+    <div class="bfly-body"></div>
+  </div>
 </div>
 
 <!-- FLOWER CURTAIN OVERLAY -->
@@ -89,58 +113,117 @@
             <div class="hb-3d-name" id="hb-name">HUZAIRAHAHAHAH ♡</div>
           </div>
           
+          <!-- The whole cake lives inside one preserve-3d pod that spins -->
           <div class="cake-pod" id="cake-pod">
             <div class="css-cake-3d" id="cake-img">
-              <!-- Tier 1 -->
+
+              <!-- ═══ TIER 1 (base, 140×140, h=70) ═══ -->
               <div class="tier tier-1">
                 <div class="face front">
-                  <div class="cake-flower cf-1">🌸</div>
+                  <div class="cake-flower cf-f1">🌸</div>
+                  <div class="cake-pearl-row"></div>
                 </div>
-                <div class="face back"></div>
-                <div class="face right"></div><div class="face left"></div>
+                <div class="face back">
+                  <div class="cake-flower cf-b1">🌸</div>
+                  <div class="cake-pearl-row"></div>
+                </div>
+                <div class="face right">
+                  <div class="cake-flower cf-r1">🌸</div>
+                  <div class="cake-pearl-row"></div>
+                </div>
+                <div class="face left">
+                  <div class="cake-flower cf-l1">🌸</div>
+                  <div class="cake-pearl-row"></div>
+                </div>
                 <div class="face top"></div>
-                
-                <!-- Decorative Spheres -->
-                <div class="sphere sph-1"></div>
-                <div class="sphere sph-2"></div>
-                <div class="sphere sph-3"></div>
-                <div class="sphere sph-4"></div>
+                <!-- Corner spheres, evenly at each corner -->
+                <div class="sphere sph-t1-fl"></div>
+                <div class="sphere sph-t1-fr"></div>
+                <div class="sphere sph-t1-bl"></div>
+                <div class="sphere sph-t1-br"></div>
               </div>
-              <!-- Tier 2 -->
+
+              <!-- ═══ TIER 2 (mid, 100×100, h=55) ═══ -->
               <div class="tier tier-2">
                 <div class="face front">
-                  <div class="cake-flower cf-2">🌸</div>
+                  <div class="cake-flower cf-f2">🌸</div>
+                  <div class="cake-pearl-row"></div>
                 </div>
-                <div class="face back"></div>
-                <div class="face right"></div><div class="face left"></div>
+                <div class="face back">
+                  <div class="cake-flower cf-b2">🌸</div>
+                  <div class="cake-pearl-row"></div>
+                </div>
+                <div class="face right">
+                  <div class="cake-flower cf-r2">🌸</div>
+                  <div class="cake-pearl-row"></div>
+                </div>
+                <div class="face left">
+                  <div class="cake-flower cf-l2">🌸</div>
+                  <div class="cake-pearl-row"></div>
+                </div>
                 <div class="face top"></div>
-                
-                <!-- Number 19 -->
-                <div class="cake-number">19</div>
-                
-                <!-- Unicorn -->
-                <div class="cake-unicorn">🦄</div>
+                <!-- Corner spheres, evenly at each corner -->
+                <div class="sphere sph-t2-fl"></div>
+                <div class="sphere sph-t2-fr"></div>
+                <div class="sphere sph-t2-bl"></div>
+                <div class="sphere sph-t2-br"></div>
 
-                <!-- Decorative Spheres -->
-                <div class="sphere sph-5"></div>
-                <div class="sphere sph-6"></div>
-                <div class="sphere sph-7"></div>
+                <!-- ══ 19 + Unicorn sit on tier-2 top, in 3D space ══ -->
+                <!-- These are children of tier-2 so they share its 3D transform context -->
+                <div class="cake-topper-19">
+                  <span>19</span>
+                  <span>19</span>
+                  <span>19</span>
+                  <span>19</span>
+                  <span>19</span>
+                </div>
+                <div class="cake-topper-unicorn">
+                  <span>🦄</span>
+                  <span>🦄</span>
+                  <span>🦄</span>
+                  <span>🦄</span>
+                  <span>🦄</span>
+                </div>
+
+                <!-- ══ 3D CANDLE (sits centred on tier-2 top) ══ -->
+                <div class="candle-assembly" id="candle-asm">
+                  <!-- 3D candle stick box -->
+                  <div class="candle-3d">
+                    <div class="cf cface-front"></div>
+                    <div class="cf cface-back"></div>
+                    <div class="cf cface-right"></div>
+                    <div class="cf cface-left"></div>
+                    <div class="cf cface-top"></div>
+                  </div>
+                  <!-- Wick -->
+                  <div class="wick"></div>
+                  <!-- Flame (wrapper gives relative context for flame-inner) -->
+                  <div class="flame-wrap">
+                    <div class="flame-outer" id="flame-o"></div>
+                    <div class="flame-inner"></div>
+                  </div>
+                </div>
               </div>
-            </div>
-            
-            <div class="candle-assembly" id="candle-asm">
-              <div class="flame-outer" id="flame-o"></div>
-              <div class="flame-inner"></div>
-              <div class="wick"></div>
-              <div class="candle-stick"></div>
-            </div>
+
+            </div><!-- /css-cake-3d -->
+
+            <!-- Glow lives inside cake-pod (not tier) so it's always centred -->
             <div class="cake-glow" id="cake-glow"></div>
-          </div>
+          </div><!-- /cake-pod -->
+        </div><!-- /scene-3d -->
+
+        <div class="blow-btn-wrap" id="blow-btn-wrap" style="display:none;">
+          <button class="blow-btn" id="blow-btn" aria-label="Blow out candle with microphone">
+            <span class="blow-icon">🎤</span>
+            <span class="blow-label">Blow the candle!</span>
+          </button>
+          <p class="blow-hint" id="blow-hint">Blow into your microphone 💨</p>
         </div>
 
         <div class="confetti-box" id="confetti-box"></div>
       </div>
     </div>
+
 
     <!-- LETTER -->
     <div class="block" id="blk-letter">
