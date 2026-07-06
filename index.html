@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Garden ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>"/>
+</head>
+<body>
+
+<!-- BACKGROUND SCENE -->
+<div class="bg-scene" aria-hidden="true">
+  <div class="bg-orb o1"></div><div class="bg-orb o2"></div>
+  <div class="bg-orb o3"></div><div class="bg-orb o4"></div>
+  <!-- Deco elements -->
+  <div class="deco deco-noodles"><img src="assets/noodles.webp" alt=""/></div>
+  <div class="deco deco-brownie"><img src="assets/brownie.webp" alt=""/></div>
+  <div class="deco deco-coffee"><img src="assets/coffee.webp" alt=""/></div>
+  <div class="deco deco-wroses"><img src="assets/white_roses.webp" alt=""/></div>
+  <div class="deco deco-rrose" id="deco-rr"></div>
+  <div class="deco deco-sun1"  id="deco-sf1"></div>
+  <div class="deco deco-sun2"  id="deco-sf2"></div>
+</div>
+
+<!-- FLOWER CURTAIN OVERLAY -->
+<div id="flower-curtain" class="flower-curtain hidden" aria-hidden="true">
+  <div class="curtain-left"  id="curtain-left"></div>
+  <div class="curtain-right" id="curtain-right"></div>
+  <div class="curtain-center" id="curtain-center">
+    <div class="curtain-msg" id="curtain-msg">🌹 ♡ 🌸</div>
+  </div>
+</div>
+
+<!-- PHASE 1: ENVELOPE -->
+<section class="phase" id="phase-1">
+  <div class="env-scene">
+    <p class="env-hint" id="env-hint">tap the envelope <span class="hint-heart">♡</span></p>
+    <div class="tap-pips" id="tap-pips">
+      <i class="pip" id="p0"></i><i class="pip" id="p1"></i>
+      <i class="pip" id="p2"></i><i class="pip" id="p3"></i>
+    </div>
+    <div class="env-wrap" id="envelope" role="button" tabindex="0" aria-label="Open envelope">
+      <div class="env-shadow"></div>
+      <div class="env-body">
+        <div class="env-flap" id="env-flap"></div>
+        <div class="env-letter" id="env-letter"><span class="env-heart">♡</span></div>
+        <div class="env-seal" id="env-seal"><span>♡</span></div>
+      </div>
+    </div>
+    <div class="env-petals-area" id="env-petals-area"></div>
+  </div>
+</section>
+
+<!-- PHASE 2: LOCK -->
+<section class="phase hidden" id="phase-2">
+  <div class="lock-card" id="lock-card">
+    <div class="lock-avatar"><img src="assets/avatar.webp" alt="avatar"/></div>
+    <h1 class="lock-title">Happy Birthday <em>♡</em></h1>
+    <p class="lock-sub">Secret number, please&nbsp;🔒</p>
+    <div class="pin-dots" id="pin-dots">
+      <span class="pdot" id="pd0"></span><span class="pdot" id="pd1"></span>
+      <span class="pdot" id="pd2"></span><span class="pdot" id="pd3"></span>
+    </div>
+    <div class="numpad">
+      <button class="nk" data-v="1">1</button><button class="nk" data-v="2">2</button><button class="nk" data-v="3">3</button>
+      <button class="nk" data-v="4">4</button><button class="nk" data-v="5">5</button><button class="nk" data-v="6">6</button>
+      <button class="nk" data-v="7">7</button><button class="nk" data-v="8">8</button><button class="nk" data-v="9">9</button>
+      <button class="nk nk-del" data-v="del">⌫</button><button class="nk" data-v="0">0</button><button class="nk nk-ok" id="nk-ok">✓</button>
+    </div>
+    <p class="pin-err" id="pin-err"></p>
+  </div>
+</section>
+
+<!-- PHASE 3: MAIN -->
+<section class="phase hidden" id="phase-3">
+  <div id="main-scroll">
+
+    <!-- CAKE REVEAL (3D ANIMATION) -->
+    <div class="block" id="blk-cake">
+      <div class="cake-stage stage-3d">
+        
+        <div class="scene-3d">
+          <div class="hb-3d-wrap" id="hb-3d-wrap">
+            <div class="hb-3d-text" id="hb-line">Happy Birthday</div>
+            <div class="hb-3d-name" id="hb-name">HUZAIRAHAHAHAH ♡</div>
+          </div>
+          
+          <div class="cake-pod" id="cake-pod">
+            <div class="css-cake-3d" id="cake-img">
+              <!-- Tier 1 -->
+              <div class="tier tier-1">
+                <div class="face front">
+                  <div class="cake-flower cf-1">🌸</div>
+                </div>
+                <div class="face back"></div>
+                <div class="face right"></div><div class="face left"></div>
+                <div class="face top"></div>
+                
+                <!-- Decorative Spheres -->
+                <div class="sphere sph-1"></div>
+                <div class="sphere sph-2"></div>
+                <div class="sphere sph-3"></div>
+                <div class="sphere sph-4"></div>
+              </div>
+              <!-- Tier 2 -->
+              <div class="tier tier-2">
+                <div class="face front">
+                  <div class="cake-flower cf-2">🌸</div>
+                </div>
+                <div class="face back"></div>
+                <div class="face right"></div><div class="face left"></div>
+                <div class="face top"></div>
+                
+                <!-- Number 19 -->
+                <div class="cake-number">19</div>
+                
+                <!-- Unicorn -->
+                <div class="cake-unicorn">🦄</div>
+
+                <!-- Decorative Spheres -->
+                <div class="sphere sph-5"></div>
+                <div class="sphere sph-6"></div>
+                <div class="sphere sph-7"></div>
+              </div>
+            </div>
+            
+            <div class="candle-assembly" id="candle-asm">
+              <div class="flame-outer" id="flame-o"></div>
+              <div class="flame-inner"></div>
+              <div class="wick"></div>
+              <div class="candle-stick"></div>
+            </div>
+            <div class="cake-glow" id="cake-glow"></div>
+          </div>
+        </div>
+
+        <div class="confetti-box" id="confetti-box"></div>
+      </div>
+    </div>
+
+    <!-- LETTER -->
+    <div class="block" id="blk-letter">
+      <div class="letter-wrap sr">
+        <div class="letter-ribbon">✦ &nbsp; ✦ &nbsp; ✦</div>
+        <span class="letter-date">July 7, 2026</span>
+        <h2 class="letter-heading">My Dearest HUZAIRAHAHAHAH,</h2>
+        <div class="letter-text">
+Happy Birthday to the most extraordinary soul I've ever had the joy of knowing. 🎂
+
+On this beautiful day, I want you to feel every bit of the love and admiration I hold for you — not just today, but every single day you walked into my life.
+
+Your laugh is the sound I want to wake up to. Your smile could light up the darkest room. And your heart? The kindest, warmest thing I have ever been close to.
+
+From every silly inside joke that sends us into uncontrollable laughter, to every late-night conversation that stretches until the stars fade — every moment with you is a treasure I guard fiercely.
+
+You make the ordinary feel magical. You make the hard days survivable. And you make good days feel extraordinary.
+
+May this year bring you every dream you've whispered to yourself at night. May you be loved as deeply as you love others. May the world give back every bit of joy you pour into it.
+
+I'll be right here — cheering, showing up, celebrating you — not just today, but always.
+
+Here's to you, Madam Jii. Here's to a lifetime of beautiful memories.
+        </div>
+        <p class="letter-sign">With every piece of my heart,<br/>Yours forever ♡</p>
+        <div class="letter-footer">🌹 &nbsp; 🌸 &nbsp; 🌹</div>
+      </div>
+    </div>
+
+    <!-- SPOTIFY SONG -->
+    <div class="block" id="blk-song">
+      <div class="song-wrap sr">
+        <iframe id="spotify-player" style="border-radius:12px" src="https://open.spotify.com/embed/track/1BxfuPKGuaTgP7aM0Bbdwr?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- POLAROID WALL -->
+    <div class="block" id="blk-photos">
+      <h2 class="block-title sr">My Pretty Girl 📷</h2>
+      <div class="photo-wall" id="photo-wall"></div>
+    </div>
+
+    <!-- VOICE NOTE (Surprise Box) -->
+    <div class="block" id="blk-voice">
+      <div class="voice-wrap sr" id="voice-wrap">
+        
+        <div class="gift-box-container" id="gift-box">
+          <div class="gift-lid"></div>
+          <div class="gift-body">
+            <div class="gift-ribbon-v"></div>
+            <div class="gift-ribbon-h"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+          <div class="gift-label">Tap to open 🎁</div>
+        </div>
+
+        <div class="voice-player-inner hidden" id="voice-player-inner">
+          <div class="voice-label">A Message For You 🎙️</div>
+          <div class="voice-from">from my heart to yours</div>
+          <div class="vp-row">
+            <button class="vbtn" id="vbtn" aria-label="Play"><span id="vicon">▶</span></button>
+            <div class="vwave" id="vwave"></div>
+            <span class="vtime" id="vtime">0:00</span>
+          </div>
+          <audio id="vaudio" src="assets/voicenote.mp3" preload="metadata"></audio>
+        </div>
+      </div>
+    </div>
+
+    <div class="love-footer">Made with ♡ just for you &nbsp;🌸</div>
+  </div>
+</section>
+
+<!-- FLOATING PETALS -->
+<div id="petal-layer" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
